@@ -56,7 +56,22 @@ function createCompassPoints() {
  *   'nothing to do' => 'nothing to do'
  */
 function* expandBraces(str) {
-    throw new Error('Not implemented');
+    let toExpand = [str];
+	let appeared = new Array();
+	let matched, replacementArr;
+	while (toExpand.length > 0) {
+		str = toExpand.pop();
+		matched = str.match(/{([^{}]*)}/);
+		if (matched != null) {
+			replacementArr = matched[1].split(',');
+			for (let replacement of replacementArr) {
+				toExpand.push(str.replace(matched[0], replacement));
+			}
+		} else if (!appeared.includes(str)) {
+			appeared.push(str);
+			yield str;
+		}
+	}
 }
 
 
@@ -137,7 +152,28 @@ function canDominoesMakeRow(dominoes) {
  * [ 1, 2, 4, 5]          => '1,2,4,5'
  */
 function extractRanges(nums) {
-    throw new Error('Not implemented');
+    let curMin, curMax;
+	let resultsArr = Array();
+	while (nums.length > 0) {
+		curMin = nums.shift();
+		curMax = curMin;
+		while ((nums.length > 0) && (nums[0] - curMax == 1)) {
+			curMax = nums.shift();
+		}
+		switch (curMax - curMin) {
+			case 0:
+				resultsArr.push(curMin.toString());
+				break
+			case 1:
+				resultsArr.push(curMin.toString());
+				resultsArr.push(curMax.toString());
+				break;
+			default:
+				resultsArr.push(curMin + '-' + curMax);
+				break;
+		}
+	}
+	return resultsArr.toString();
 }
 
 module.exports = {

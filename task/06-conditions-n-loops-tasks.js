@@ -30,7 +30,13 @@
  *
  */
 function getFizzBuzz(num) {
-    throw new Error('Not implemented');
+    if ((num % 3 == 0) && (num % 5 == 0))
+		return 'FizzBuzz';
+    if (num % 3 == 0)
+    	return 'Fizz';
+    if (num % 5 == 0)
+    	return 'Buzz';
+    return num;
 }
 
 
@@ -46,7 +52,10 @@ function getFizzBuzz(num) {
  *   10 => 3628800
  */
 function getFactorial(n) {
-    throw new Error('Not implemented');
+    let result = 1;
+	for (let i = 2; i <= n; i++)
+		result *= i;
+	return result;
 }
 
 
@@ -63,7 +72,10 @@ function getFactorial(n) {
  *   -1,1  =>  0  ( = -1 + 0 + 1 )
  */
 function getSumBetweenNumbers(n1, n2) {
-    throw new Error('Not implemented');
+    let result = 0;
+	for (let i = n1; i <= n2; i++)
+		result += i;
+	return result;
 }
 
 
@@ -82,7 +94,9 @@ function getSumBetweenNumbers(n1, n2) {
  *   10,10,10 =>  true
  */
 function isTriangle(a,b,c) {
-    throw new Error('Not implemented');
+    if ((a + b > c) && (a + c > b) && (b + c > a))
+		return true;
+	return false;
 }
 
 
@@ -119,7 +133,14 @@ function isTriangle(a,b,c) {
  *  
  */
 function doRectanglesOverlap(rect1, rect2) {
-    throw new Error('Not implemented');
+    if (((rect2.top >= rect1.top) && (rect2.top <= (rect1.top + rect1.width))
+		 && (rect2.left >= rect1.left) && (rect2.left <= (rect1.left + rect1.height)))
+		|| ((rect1.top >= rect2.top) && (rect1.top <= (rect2.top + rect2.width))
+		 && (rect1.left >= rect2.left) && (rect1.left <= (rect2.left + rect2.height)))) {
+		return true;
+	} else {
+		return false;
+	}
 }
 
 
@@ -396,7 +417,19 @@ function getCommonDirectoryPath(pathes) {
  *
  */
 function getMatrixProduct(m1, m2) {
-    throw new Error('Not implemented');
+    let result = Array(m1.length);
+    for (let i = 0; i < result.length; i++) {
+    	result[i] = Array(m2[0].length);
+    }
+    for (let i = 0; i < result.length; i++) {
+    	for (let j = 0; j < result[0].length; j++) {
+    		result[i][j] = 0;
+    		for (let k = 0; k < m2.length; k++) {
+    			result[i][j] += (m1[i][k] * m2[k][j]);
+    		}
+    	}
+    }
+    return result;
 }
 
 
@@ -431,7 +464,20 @@ function getMatrixProduct(m1, m2) {
  *
  */
 function evaluateTicTacToePosition(position) {
-    throw new Error('Not implemented');
+    let symbols = Array('X', '0');
+	for (let i = 0; i < symbols.length; i++) {
+		if (((position[0][0] == symbols[i]) && (position[1][1] == symbols[i]) && (position[2][2] == symbols[i]))
+			|| ((position[0][2] == symbols[i]) && (position[1][1] == symbols[i]) && (position[2][0] == symbols[i]))) {
+			return symbols[i];
+		}
+		for (let j = 0; j < 3; j++) {
+			if (((position[0][j] == symbols[i]) && (position[1][j] == symbols[i]) && (position[2][j] == symbols[i]))
+				|| ((position[j][0] == symbols[i]) && (position[j][1] == symbols[i]) && (position[j][2] == symbols[i]))) {
+				return symbols[i];
+			}
+		}
+	}
+	return undefined;
 }
 
 
